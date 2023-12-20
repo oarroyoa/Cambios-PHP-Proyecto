@@ -28,7 +28,7 @@ class Pregunta
      */
     public function tablaPregunta($idCategoria)
     {
-        return $this->modelo->verPreguntas($idCategoria);;
+        return $this->modelo->verPreguntas($idCategoria);
     }
 
     /**
