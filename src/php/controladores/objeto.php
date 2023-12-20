@@ -9,7 +9,7 @@ class Objeto
      * @var string|null $vista Nombre de la vista actual.
      */
     public $vista;
-    public $modelo;
+    private $modelo;
     /**
      * Constructor de la clase.
      */
@@ -25,6 +25,7 @@ class Objeto
      */
     public function anadir_objeto()
     {
+        /* Cambio respecto a la versión anterior. Se llama a la vista junto con la función de dicha vista */
         $this->vista = 'anadir_objeto';
 
         $_GET['msg'] = '';
@@ -93,14 +94,17 @@ class Objeto
                             $this->modelo->agregarObjeto($nombreSanitizado, $descripcionSanitizada, $base64, $puntuacionSanitizada, ($buenoSanitizado ? 1 : 0), $idCategoria);
                         }
                     }
-                    $_GET['msg'] = 'Objetos agregados o actualizados correctamente';
+                    $_GET['msg'] = 'Objetos agregados o actualizados correctamente';                    
+                    /* CAMBIO: Quitado el header, reemplazado por return */
+                    return $_GET['msg'];
                 } else {
                     // Mostrar mensaje de error si no se pueden agregar campos sanitizados
                     $_GET['msg'] = 'Error al agregar objetos. Verifica que todos los campos estén completos y válidos.';
-                    break;
+                    /* CAMBIO: Quitado el header, reemplazado por return */
+                    return $_GET['msg'];
                 }
             }            
-            // Cerrar la conexión después de procesar todos los objetos
+            /* CAMBIO: Quitado el header, reemplazado por return */
             return $_GET['msg'];
 
         }
@@ -113,9 +117,11 @@ class Objeto
     public function borrarObjeto()
     {
         $this->modelo->borrarObjeto($_POST["id"]);
+        /* CAMBIO: Llamada a la vista */
         $this->anadir_objeto(); 
 
         $_GET['msg'] = "Objeto borrado correctamente";
+        /* CAMBIO: Quitado el header, reemplazado por return */
         return $_GET['msg'];
     }
 

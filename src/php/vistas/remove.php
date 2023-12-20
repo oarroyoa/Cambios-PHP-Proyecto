@@ -25,7 +25,7 @@
             // Si la función es 'Categoria', muestra el nombre de la categoría
             if ($funcion == 'Categoria') {
                 require_once 'controladores/categoria.php';
-
+                /* Cambio: Creado objeto para llamar al controlador de categoría */
                 $objCategoria = new Categoria();
                 echo " " . $objCategoria->nombreCategoria($id);       
             }

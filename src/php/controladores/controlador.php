@@ -10,7 +10,7 @@ class Controlador
      * @var string|null $vista Nombre de la vista actual.
      */
     public $vista;
-    public $modelo;
+    private $modelo;
 
     /**
      * Constructor de la clase.
@@ -18,6 +18,7 @@ class Controlador
     public function __construct()
     {
         $this->vista = null;
+        /*Cambio respecto a la versión anterior. Creamos el modelo en el constructor */
         $this->modelo = new Modelo();
 
     }
@@ -38,6 +39,7 @@ class Controlador
      */
     public function configuracion()
     {
+        /* Cambio respecto a la versión anterior. Se llama a la vista junto con la función que recoge dicha vista */
         $this->vista = 'modConfig';
         return $this->modelo->configuracion();
     }
@@ -67,9 +69,9 @@ class Controlador
                 $_GET['msg'] = 'Configuración actualizada correctamente.';
             }
         }
-        
+        /* CAMBIO: Llamada a la vista */
         $this->configuracion();
-        // Redirigir a la vista de configuración con el mensaje
+        /* CAMBIO: Quitado el header, reemplazado por return */
         return $_GET['msg'];
     }
 

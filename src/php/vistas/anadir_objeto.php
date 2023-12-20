@@ -18,7 +18,7 @@
             <div id="objetosContainer">
                 <?php
                 require_once 'controladores/categoria.php';
-
+                /* Cambio: Creado objeto para llamar al controlador de categoría */
                 $objCat = new Categoria();
                 $idCategoria = isset($_POST['idCategoria']) ? $_POST['idCategoria'] : '';
 

@@ -2,7 +2,6 @@
     ini_set('display_errors', 1);
 
     require_once 'config/configBD.php';
-    require_once 'modelos/modelo.php';
     require_once 'config/configVal.php';
     
     /** 

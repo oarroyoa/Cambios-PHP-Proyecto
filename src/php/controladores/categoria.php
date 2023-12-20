@@ -9,7 +9,7 @@ class Categoria
      * @var string|null $vista Nombre de la vista actual.
      */
     public $vista;
-    public $modelo;
+    private $modelo;
     
     /**
      * Constructor de la clase.
@@ -113,6 +113,8 @@ class Categoria
      */
     public function insertarCategoria()
     {
+        /* Cambio respecto a la versión anterior. Se llama a la vista junto con la función de dicha vista */
+
         $this->vista = 'anadir_categoria';
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -129,7 +131,9 @@ class Categoria
         if (empty($categoria) || empty($tablero)) {
             // Mensaje de error si la entrada se vuelve vacía después de la sanitización
             $_GET['msg'] = "Error: La entrada no puede estar vacía o contener solo caracteres especiales.";
+            /* CAMBIO: Llamada a la vista */
             $this->inicio();
+            /* CAMBIO: Quitado el header, reemplazado por return */
             return $_GET['msg'];
         }
     
@@ -145,7 +149,9 @@ class Categoria
         if (!in_array($tipo, $extensionesValidas)) {
             // Mensaje de error si la extensión no es válida
             $_GET['msg'] = "Error: Solo se permiten imágenes en formato PNG, JPG o JPEG.";
+            /* CAMBIO: Llamada a la vista */
             $this->inicio();
+            /* CAMBIO: Quitado el header, reemplazado por return */
             return $_GET['msg'];
         }
     
@@ -156,7 +162,9 @@ class Categoria
     
         // Mensaje de éxito
         $_GET['msg'] = "Categoría añadida correctamente";
+        /* CAMBIO: Llamada a la vista */
         $this->inicio();
+        /* CAMBIO: Quitado el header, reemplazado por return */
         return $_GET['msg'];
         }
     }
@@ -177,7 +185,9 @@ class Categoria
             if (empty($id) || empty($nombre) || empty($idCategoria)) {
                 // Mensaje de error si la entrada se vuelve vacía después de la sanitización
                 $_GET['msg'] = "Error: La entrada no puede estar vacía o contener solo caracteres especiales";
+                /* CAMBIO: Llamada a la vista */
                 $this->tablaCategoria();
+                /* CAMBIO: Quitado el header, reemplazado por return */
                 return $_GET['msg'];
             }
 
@@ -205,7 +215,9 @@ class Categoria
             // Mensaje de éxito
             $_GET['msg'] = "Tablero actualizado correctamente";
             $_GET['id'] = $idCategoria;
+            /* CAMBIO: Llamada a la vista */
             $this->tablaCategoria();
+            /* CAMBIO: Quitado el header, reemplazado por return */
             return $_GET['msg'];
         }
     }
@@ -217,7 +229,9 @@ class Categoria
     {
         $this->modelo->borrarCategoria($_POST["id"]);
         $_GET['msg'] = "Categoría borrada correctamente";
+        /* CAMBIO: Llamada a la vista */
         $this->inicio();
+        /* CAMBIO: Quitado el header, reemplazado por return */
         return $_GET['msg'];
     }
 

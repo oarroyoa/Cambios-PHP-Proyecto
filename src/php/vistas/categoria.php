@@ -58,6 +58,7 @@
                     </tr>
                     <?php
                     require_once 'controladores/pregunta.php';
+                    /* Cambio: Creado objeto para llamar al controlador de preguntas */
                     $objPregunta = new Pregunta();
                     /* Tablas de las Preguntas */
                         if(isset($_GET['id'])){
@@ -88,6 +89,7 @@
                     </tr>
                     <?php
                     require_once 'controladores/objeto.php';
+                    /* Cambio: Creado objeto para llamar al controlador de objetos */
 
                     $objObjeto = new Objeto();
                     /* Tablas de los Objetos */

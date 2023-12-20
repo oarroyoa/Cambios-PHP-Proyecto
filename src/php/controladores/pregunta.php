@@ -9,7 +9,7 @@ class Pregunta
      * @var string|null $vista Nombre de la vista actual.
      */
     public $vista;
-    public $modelo;
+    private $modelo;
 
     /**
      * Constructor de la clase.
@@ -37,8 +37,10 @@ class Pregunta
     public function borrarPregunta()
     {
         $this->modelo->borrarPregunta($_POST["id"]);
+        /* CAMBIO: Llamada a la vista */
         $this->anadir_pregunta(); 
         $_GET['msg'] = "Pregunta borrada correctamente";
+        /* CAMBIO: Quitado el header, reemplazado por return */
         return $_GET['msg'];
     }
 
@@ -61,6 +63,8 @@ class Pregunta
      */
     public function anadir_pregunta()
     {
+        /* Cambio respecto a la versión anterior. Se llama a la vista junto con la función de dicha vista */
+
         $this->vista = 'anadir_pregunta';
 
         $_GET['msg'] = '';
@@ -82,12 +86,14 @@ class Pregunta
                 // Verificar si la pregunta está vacía después de la sanitización
                 if (empty($pregunta)) {
                     $_GET['msg'] = 'Error: La pregunta no puede estar vacía. No se pueden introducir caracteres especiales.';
+                    /* CAMBIO: Quitado el header, reemplazado por return */
                     return $_GET['msg'];
                 }
 
                 // Verificar si la pregunta ya existe al añadir
                 if (empty($preguntaData['idPregunta']) && $this->modelo->preguntaExiste($pregunta, $idCategoria)) {
                     $_GET['msg'] = 'Error: La pregunta ya existe. Por favor, elige otro nombre.';
+                    /* CAMBIO: Quitado el header, reemplazado por return */
                     return $_GET['msg'];
                 }
 
@@ -115,16 +121,15 @@ class Pregunta
                     // La pregunta no existía, agregar
                     $this->modelo->agregarPregunta($pregunta, $refAcierto, $refFallo, $respuesta, $idCategoria);
                     $_GET['msg'] = 'Preguntas agregadas o actualizadas correctamente';
+                    /* CAMBIO: Quitado el header, reemplazado por return */
                     return $_GET['msg'];
                 } else {
                     $_GET['msg'] = 'Preguntas actualizadas correctamente';
+                    /* CAMBIO: Quitado el header, reemplazado por return */
+                    return $_GET['msg'];
                 }
             }
-
         }
-        return $_GET['msg'];
-
-
     }
 
     /**

@@ -12,7 +12,9 @@
                 //Mostrar mensaje si  existe 
                 if(isset($_GET['msg'])){
                     echo $_GET['msg'];
-                }
+                }                
+                /* Cambio: Creado objeto para llamar al controlador de categoría */
+
                 $objCat = new Categoria();
                 $idCategoria = isset($_POST['idCategoria']) ? $_POST['idCategoria'] : '';
 
